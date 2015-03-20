@@ -9,7 +9,6 @@ MySQL-python==1.2.5
 Pillow==2.3.0
 PyMySQL==0.6.6
 PyOpenGL==3.0.2
-Pyrex==0.9.8.5
 SQLAlchemy==0.9.9
 Twisted-Core==13.2.0
 Twisted-Names==13.2.0
