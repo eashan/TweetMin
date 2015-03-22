@@ -1,21 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Flask Intro</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Tweetmin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+   <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
+
   <body>
+
     <div class="container">
-     {% block content %} {% endblock %}
-
+     {% block menu %} {% endblock %}
      {% if error %}
-     <p class="error" ><b>ERROR:< {{ error }}</b></p>
+     <div  class="alert alert-danger" role="alert" ><h3>ERROR:{{ error }}</h3></div>
      {% endif%}
-
-     {% for message in get_flashed_messages() %}
-     {{message}}
+      {% for message in get_flashed_messages() %}
+     <div class="alert alert-success" role="alert"><h3>{{message}}</h3></div>
      {% endfor %}
-    </div>
+   
+      {% block content %} {% endblock %}
+     
+      
+      
+    
+      <footer class="footer">
+        <p>&copy; Company 2014</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+
+
+      
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="static/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    {% block modals %}{% endblock %}
+   <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
 </html>

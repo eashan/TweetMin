@@ -1,16 +1,44 @@
 {% extends "base.html" %}
+
+{% block menu %}
+ <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="{{url_for('home')}}">Home</a></li>
+            <li role="presentation"><a href="/logout">Logout</a></li>
+           
+          </ul>
+        </nav>
+        <h3 class="text-muted">TweetMin</h3>
+      </div>
+{% endblock %}
+
 {% block content %}
    
-
-      <h1>Welcome to Flask!</h1>
+   <div class="jumbotron">
+        <h2 style="color:#0066ff;">Tweetmin</h2>
+      <center>
+      <form action="" method="post" style="width:350px; position:relative; ">
+        <input type="text" class="form-control" name="tweet" placeholder="Tweet" value="{{request.form['tweet']}}">
       <br>
+       <input class="btn btn-primary btn-sm" type="submit" value="Post">
+      </form>
+      </center>
+      </div>
       <h2>Posts</h2>
+       
       {% for post in posts %}
-      <h4> {{post.title}}</h4>
-      <h5><b>Description:</b> <br>{{post.description}}</h5>
+      <div class="jumbotron-mini">
+
+      <h3 >{{post.author.name}}</h3>
+      <h4 style="color:#0066ff; text-align:center;"> {{post.title}}</h4>
+      <h4>{{post.description}}</h5>
+      
+      </div>
 
       {% endfor %}
 <br>
-      <p>Click <a href="/logout">here</a> to logout.</p>
+     
+     
    
 {% endblock %}
