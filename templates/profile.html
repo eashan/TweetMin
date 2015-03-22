@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block menu %}
+ <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="{{url_for('home')}}">Home</a></li>
+            <li role="presentation"  class="active"><a href="{{url_for['profile']}}">Profile</a></li>
+            <li role="presentation"><a href="/logout">Logout</a></li>
+
+            
+          </ul>
+        </nav>
+        <h3 class="text-muted">TweetMin</h3>
+      </div>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+      <h1 style="color:#0066ff;">Hello {{user}}</h1>
+      </div>
+      <h2> Life Time Tweets:</h2>
+      {% for post in userposts %}
+       <div class="jumbotron-mini">
+
+      <h3 style="color:#0066ff; ">{{post.author.name}}</h3>
+      <h4 style="color:#0066ff; text-align:center;"> {{post.title}}</h4>
+      <h4>{{post.description}}</h5>
+      
+      </div>
+      {% endfor %}
+   
+
+{% endblock %}

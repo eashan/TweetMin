@@ -77,7 +77,14 @@ def signup():
 @app.route('/welcome')
 def welcome():
     return render_template('welcome.html')  # render a template
-
+@app.route('/profile')
+def profile():
+    posts=db.session.query(blogpost).all()
+    userposts=[]
+    for p in posts:
+        if p.author.name==session['loginuser']:
+            userposts.append(p)
+    return render_template('profile.html',user=session['loginuser'],userposts=userposts)
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
