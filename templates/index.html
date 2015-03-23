@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-   
+   <!--<div class="alert alert-danger" id='charexceedalert' ></div>-->
    <div class="jumbotron">
         <h2 style="color:#0066ff;">Tweetmin</h2>
       <center>
@@ -31,27 +31,31 @@
        
       {% for post in posts %}
       <div class="jumbotron-mini">
-
+        
       <h3 style="color:#0066ff; ">{{post.author.name}}</h3>
       <h4 style="color:#0066ff; text-align:center;"> {{post.title}}</h4>
-      <h4>{{post.description}}</h5>
+      <h4 style=" display:block; position:relative;">{{post.description}}</h4>
       
       </div>
-<script>
-function checklength(){
+
+      {% endfor %}
+<br>
+     
+     {% block modals%}
+     <script>
+/*function checklength(){
 var textBox = document.getElementById("tweetbox");
 var textLength = textBox.value.length;
 if(textLength > 140)
 {
   document.getElementById('tweetpost').disabled=true;
+  document.getElementById('charexceedalert').innerHTML='<h2>Only 140 Characters allowed</h2>'
     //red
-    textBox.style.backgroundColor = "#FF0000";
+   // textBox.style.backgroundColor = "#FF0000";
 }
 }
 </script>
-      {% endfor %}
-<br>
-     
+     {% endblock%}
      
    
 {% endblock %}

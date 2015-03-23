@@ -36,16 +36,22 @@ def login_required(f):
 @login_required
 def home():
     error=None
+    posts=db.session.query(blogpost).order_by(blogpost.id.desc()).all()
     if request.method=='POST':
-        user1=user.query.filter_by(email=session['loginemail']).first()
-        db.session.add(blogpost(request.form['tweet'],user1.id))
-        db.session.commit()
-        return redirect(url_for('home'))
+        if request.form['tweet']=='':
+            return render_template('index.html',error='Please enter something',posts=posts)
+        elif len(request.form['tweet'])>90:
+            return render_template('index.html',error='Only 90 Characters allowed',posts=posts)
+        else:
+            user1=user.query.filter_by(email=session['loginemail']).first()
+            db.session.add(blogpost(request.form['tweet'],user1.id))
+            db.session.commit()
+            return redirect(url_for('home'))
     #g.db=connect_db()
     #cur=g.db.execute("select * from posts")
     #posts=[dict(title=row[0],description=row[1]) for row in cur.fetchall()]
     #g.db.close()
-    posts=db.session.query(blogpost).all()
+    
     return render_template('index.html',posts=posts)  # render a template
     # return "Hello, World!"  # return a string
 
