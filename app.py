@@ -54,6 +54,9 @@ def home():
     
     return render_template('index.html',posts=posts)  # render a template
     # return "Hello, World!"  # return a string
+@app.route('/aboutus')
+def about():
+    return render_template('aboutus.html')
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():
@@ -67,6 +70,9 @@ def signup():
             elif request.form['passw']=='':
                 error="Please enter Password"
                 return render_template('signup.html',error=error) 
+            elif '@' not in list(request.form['email']):
+                error="invalid Email Address"
+                return render_template('signup.html',error=error)
             else:
                 db.session.add(user(request.form['uname'],request.form['email'],request.form['passw']))
                 db.session.commit()
@@ -84,6 +90,7 @@ def signup():
 def welcome():
     return render_template('welcome.html')  # render a template
 @app.route('/profile')
+@login_required
 def profile():
     posts=db.session.query(blogpost).all()
     userposts=[]
@@ -116,6 +123,7 @@ def login():
 @login_required
 def logout():
     session.pop('logged_in', None)
+
     flash('You were logged out.')
     return redirect(url_for('welcome'))
 
